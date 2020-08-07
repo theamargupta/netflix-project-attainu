@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getTvShow } from '../../Redux/TvShows/tvshowActionGenerator';
-import TitleList from '../TitleList';
+import TitleList from '../../Components/TitleList';
 
 const TvShows = ({ TvShows, getTvShow }) => {
   const TvShowData1_10 = TvShows.slice(0, 10);

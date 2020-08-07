@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'; //, Fragment
 import { connect } from 'react-redux';
 import { getMovies } from '../../Redux/Movie/movieActionGenrator';
-import TitleList from '../TitleList';
+import TitleList from '../../Components/TitleList';
 
 const Movies = ({ movies, getMovies }) => {
   const movieData1_10 = movies.slice(0, 10);
