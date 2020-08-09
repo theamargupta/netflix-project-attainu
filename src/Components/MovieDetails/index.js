@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { firestore } from '../../Firebase';
