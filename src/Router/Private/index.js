@@ -2,7 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ component: RouteComponent, currentUser, ...rest }) => {
+const PrivateRoute = (props) => {
+  const { component: RouteComponent, ...rest } = props;
+  const { currentUser } = props;
+  console.log(!!currentUser);
   return (
     <Route
       {...rest}
