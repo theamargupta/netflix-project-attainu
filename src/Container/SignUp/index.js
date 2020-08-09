@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { auth, signInWithGoogle, signInWithFacebook } from '../../Firebase';
+import {
+  auth,
+  signInWithGoogle,
+  signInWithFacebook,
+  firestore,
+} from '../../Firebase';
 import { connect } from 'react-redux';
 import { setUser } from '../../Redux/User/userActionGenerator';
 import validator from 'validator';
@@ -20,8 +25,11 @@ const SignUp = ({ setUser, currentUser }) => {
           if (validator.isAlphanumeric(password)) {
             if (password === confirm_password) {
               try {
-                await auth.createUserWithEmailAndPassword(email, password);
-                return auth.currentUser.updateProfile({
+                const data = await auth.createUserWithEmailAndPassword(
+                  email,
+                  password
+                );
+                await auth.currentUser.updateProfile({
                   displayName: name,
                 });
               } catch (error) {
@@ -29,7 +37,7 @@ const SignUp = ({ setUser, currentUser }) => {
                   position: 'center',
                   icon: 'error',
                   title: error,
-                  showConfirmButton: false,
+                  showConfirmButton: true,
                   timer: 1500,
                 });
               }

@@ -47,6 +47,7 @@ const ManageProfile = ({ history, setUserProfile, currentUser }) => {
     setUserProfile(profile);
     profile && history.push('/movie');
   }, [history, profile, setUserProfile]);
+
   const handleClick = (img, data) => {
     setProfile({ img: img, profile: data });
   };
