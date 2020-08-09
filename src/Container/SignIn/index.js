@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 import { auth, signInWithGoogle, signInWithFacebook } from '../../Firebase';
 import { connect } from 'react-redux';
 import { setUser } from '../../Redux/User/userActionGenerator';
@@ -71,6 +71,7 @@ const SignIn = ({ history, setUser, currentUser }) => {
       </form>
       <button onClick={() => signInWithFacebook()}>Facebook</button>
       <button onClick={() => signInWithGoogle()}>Google</button>
+      <Link to='/signup'>Sign Up</Link>
     </div>
   );
 };
