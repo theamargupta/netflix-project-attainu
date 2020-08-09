@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; //, Fragment
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getMovies } from '../../Redux/Movie/movieActionGenrator';
 import TitleList from '../../Components/TitleList';

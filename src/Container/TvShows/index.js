@@ -2,8 +2,13 @@ import React from 'react';
 import TvShow from '../../Components/TvShows';
 import Header from '../../Components/Header';
 import Hero from '../../Components/Hero';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const TvShows = () => {
+const TvShows = ({ currentUser }) => {
+  if (!currentUser) {
+    return <Redirect to='/signin' />;
+  }
   return (
     <div>
       <Header />
@@ -21,5 +26,7 @@ const TvShows = () => {
     </div>
   );
 };
-
-export default TvShows;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+export default connect(mapStateToProps)(TvShows);

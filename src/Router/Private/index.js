@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 const PrivateRoute = (props) => {
   const { component: RouteComponent, ...rest } = props;
   const { currentUser } = props;
-  console.log(!!currentUser);
   return (
     <Route
       {...rest}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; //, { Fragment }
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import Modal from '../Modal';

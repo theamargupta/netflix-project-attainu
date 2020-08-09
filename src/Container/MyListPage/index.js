@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'; //
+import React, { useEffect, useState, Fragment } from 'react';
 import { firestore } from '../../Firebase';
 import Header from '../../Components/Header';
 import { connect } from 'react-redux';
@@ -35,8 +35,8 @@ const MyList = ({ currentUser, userProfile }) => {
       <Header />
       <div className={classes.root}>
         <Grid container spacing={3}>
-          {movie.map((data) => (
-            <GridCard movie={data} />
+          {movie.map((data, index) => (
+            <GridCard key={index} movie={data} />
           ))}
         </Grid>
       </div>

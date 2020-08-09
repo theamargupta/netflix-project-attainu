@@ -84,7 +84,7 @@ const SignUp = ({ setUser, currentUser }) => {
       setUser(user);
     });
   }, [setUser]);
-  return currentUser ? (
+  return !currentUser ? (
     <Redirect to='/' />
   ) : (
     <div>

@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GridCard = ({ movie }) => {
-  console.log(movie);
   const classes = useStyles();
   const [myMovie, setMovie] = useState('');
   const [isToggle, settoggle] = useState(false);
@@ -37,14 +36,6 @@ const GridCard = ({ movie }) => {
             title={movie.title || movie.name}
           />
         </CardActionArea>
-        {/* <CardActions>
-        <Button size='small' color='primary'>
-          Share
-        </Button>
-        <Button size='small' color='primary'>
-          Learn More
-        </Button>
-      </CardActions> */}
       </Card>
     </Grid>
   );

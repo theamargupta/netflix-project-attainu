@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setUserProfile } from '../../Redux/User/userActionGenerator';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import Logo from '../../Components/Logo';
 import './index.scss';
 
@@ -53,6 +53,9 @@ const ManageProfile = ({ history, setUserProfile, currentUser }) => {
   const handleClick = (img, data) => {
     setProfile({ img: img, profile: data });
   };
+  if (!currentUser) {
+    return <Redirect to='/signin' />;
+  }
   return (
     <div className={classes.root}>
       <Logo />
