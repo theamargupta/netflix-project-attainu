@@ -2,6 +2,7 @@ import React from 'react';
 import TvShow from '../../Components/TvShows';
 import Header from '../../Components/Header';
 import Hero from '../../Components/Hero';
+import Footer from '../../Components/Footer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -19,10 +20,8 @@ const TvShows = ({ currentUser }) => {
           'When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. '
         }
       />
-      {/* it will conatin the search result */}
-      {/* <SearchResult />  */}
-      TvShows
       <TvShow />
+      <Footer />
     </div>
   );
 };

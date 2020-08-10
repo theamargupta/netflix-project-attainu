@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridCard from '../../Components/GridCard';
+import './index.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,7 @@ const MyList = ({ currentUser, userProfile }) => {
     <Fragment>
       <Header />
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container className='grid' spacing={3}>
           {movie.map((data, index) => (
             <GridCard key={index} movie={data} />
           ))}

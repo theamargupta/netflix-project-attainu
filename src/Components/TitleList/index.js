@@ -8,7 +8,7 @@ import 'swiper/components/navigation/navigation.scss';
 import './index.scss';
 
 SwiperCore.use(Navigation);
-const TitleList = ({ slide, title }) => {
+const TitleList = ({ slide, title, height }) => {
   const [movie, setMovie] = useState('');
   const [isToggle, settoggle] = useState(false);
   const handleClick = (value) => {
