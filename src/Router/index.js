@@ -1,15 +1,15 @@
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./Private";
-const Movie = lazy(() => import("../Container/Home"));
-const TvShow = lazy(() => import("../Container/TvShows"));
-const MyList = lazy(() => import("../Container/MyListPage"));
-const ManageProfile = lazy(() => import("../Container/ManageProfile"));
-const SearchData = lazy(() => import("../Container/SearchPage"));
-const NotFound = lazy(() => import("../Container/NotFound"));
-const LandingPage = lazy(() => import("../Container/LandingPage"));
-const EditManageProfile = lazy(() => import("../Container/EditManageProfile"));
+import Movie from "../Container/Home";
+import TvShow from "../Container/TvShows";
+import MyList from "../Container/MyListPage";
+import ManageProfile from "../Container/ManageProfile";
+import SearchData from "../Container/SearchPage";
+import NotFound from "../Container/NotFound";
+import LandingPage from "../Container/LandingPage";
+import EditManageProfile from "../Container/EditManageProfile";
 
 const AppRouter = () => {
   const { isAuthenticated } = useAuth0();
