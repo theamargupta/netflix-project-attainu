@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.scss';
 import netflix from '../../Assets/netflix.svg';
+import './index.scss';
 
 const Logo = () => {
   return (

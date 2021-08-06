@@ -2,10 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 import Logo from "../../Components/Logo";
-import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserProfile } from "../../Redux/slices/profileSlice";
 import { useHistory } from "react-router-dom";
+import "./index.scss";
 
 const useStyles = makeStyles((theme) => ({
   root: {

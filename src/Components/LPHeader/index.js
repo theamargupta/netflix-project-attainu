@@ -1,10 +1,11 @@
 import React from 'react';
-import './index.css';
 import logo from '../../Assets/svg/logo.svg';
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { useAuth0 } from "@auth0/auth0-react";
 import { ic_keyboard_arrow_right } from 'react-icons-kit/md/ic_keyboard_arrow_right';
+import './index.css';
+
 const Header = () => {
   const { loginWithRedirect } = useAuth0();
   return (

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./index.scss";
 import { useHistory } from "react-router-dom";
 import {
   ClickAwayListener,
@@ -12,6 +11,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllProfile, setUserProfile } from "../../Redux/slices/profileSlice";
+import "./index.scss";
 
 const UserProfile = () => {
   const history = useHistory();

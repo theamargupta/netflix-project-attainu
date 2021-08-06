@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.scss';
 import editicon from '../../Assets/images/icons8-edit.svg';
+import './index.scss';
 
 const Logo = ({ src }) => {
   return (

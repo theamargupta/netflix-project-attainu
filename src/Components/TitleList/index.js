@@ -3,11 +3,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import Modal from '../Modal';
 import { IMAGE_BASE_URL, GRID_IMAGE_SIZE } from '../../Config';
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import './index.scss';
 import Logo from '../Logo2';
 import play from '../../Assets/image/play.png';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/swiper.scss';
+import './index.scss';
 
 SwiperCore.use(Navigation);
 const TitleList = ({ slide, title, height }) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../../Assets/svg/logo.svg';
 import styled from 'styled-components';
-import './index.css';
 import Footer from '../../Components/LPFooter';
+import './index.css';
 
 const ErrorPage404 = () => {
   return (
