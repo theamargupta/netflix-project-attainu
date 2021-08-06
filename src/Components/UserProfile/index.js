@@ -1,8 +1,6 @@
-import React from 'react';
-import './index.scss';
-import { connect } from 'react-redux';
-import { auth } from '../../Firebase';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import "./index.scss";
+import { useHistory } from "react-router-dom";
 import {
   ClickAwayListener,
   Grow,
@@ -10,13 +8,24 @@ import {
   Popper,
   MenuItem,
   MenuList,
-} from '@material-ui/core';
+} from "@material-ui/core";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllProfile, setUserProfile } from "../../Redux/slices/profileSlice";
 
-const UserProfile = ({ img, profileName }) => {
+const UserProfile = () => {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-
+  const { profile, image } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const { user,logout } = useAuth0();
+  useEffect(() => {
+    if (user && image.length === 0) {
+      dispatch(setUserProfile({ image: user.picture, profile: user.name }));
+      dispatch(setAllProfile({ image: user.picture, profile: user.name }));
+    }
+  }, [dispatch, image.length, user, user.name, user.picture]);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -30,7 +39,7 @@ const UserProfile = ({ img, profileName }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
     }
@@ -47,18 +56,18 @@ const UserProfile = ({ img, profileName }) => {
   }, [open]);
 
   return (
-    <div className='UserProfile'>
+    <div className="UserProfile">
       <div>
         <div
-          className='User'
+          className="User"
           ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup='true'
+          aria-controls={open ? "menu-list-grow" : undefined}
+          aria-haspopup="true"
           onClick={handleToggle}
         >
-          <div className='name'>{profileName}</div>
-          <div className='image'>
-            <img src={img} alt='' />
+          <div className="name">{profile}</div>
+          <div className="image">
+            <img src={image} alt={profile} />
           </div>
         </div>
       </div>
@@ -74,20 +83,20 @@ const UserProfile = ({ img, profileName }) => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+                placement === "bottom" ? "center top" : "center bottom",
             }}
           >
-            <Paper className='profile_dropdown'>
+            <Paper className="profile_dropdown">
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
-                  id='menu-list-grow'
+                  id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={() => history.push('/manage')}>
+                  <MenuItem onClick={() => history.push("/manage")}>
                     Manage Profile
                   </MenuItem>
-                  <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem>
+                  <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
@@ -97,9 +106,4 @@ const UserProfile = ({ img, profileName }) => {
     </div>
   );
 };
-
-const mapStateToProps = ({ user }) => ({
-  img: user.userProfile.img,
-  profileName: user.userProfile.profile,
-});
-export default connect(mapStateToProps)(UserProfile);
+export default UserProfile;

@@ -1,34 +1,33 @@
-import React, { useEffect, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { getTvShow } from '../../Redux/TvShows/tvshowActionGenerator';
-import TitleList from '../../Components/TitleList';
+import React from "react";
+import TitleList from "../../Components/TitleList";
+import { useGetTvShowQuery } from "../../Utils/services";
 
-const TvShows = ({ TvShows, getTvShow }) => {
-  const TvShowData1_10 = TvShows.slice(0, 10);
-  const TvShowData11_20 = TvShows.slice(10, 20);
-  const TvShowData21_30 = TvShows.slice(20, 30);
-  const TvShowData31_40 = TvShows.slice(30, 40);
-  const TvShowData41_50 = TvShows.slice(40, 50);
-  const TvShowData51_60 = TvShows.slice(50, 60);
-
-  useEffect(() => {
-    getTvShow();
-  }, [getTvShow]);
+const TvShows = () => {
+  const { data: data1, isLoading: isLoading1 } = useGetTvShowQuery(1);
+  const { data: data2, isLoading: isLoading2 } = useGetTvShowQuery(2);
+  const { data: data3, isLoading: isLoading3 } = useGetTvShowQuery(3);
   return (
-    <Fragment>
-      <TitleList title='Popular' slide={TvShowData1_10} />
-      <TitleList title='Top Rated' slide={TvShowData11_20} />
-      <TitleList title='Highest Grosing' slide={TvShowData21_30} />
-      <TitleList title='New Releases' slide={TvShowData31_40} />
-      <TitleList title='Most Liked' slide={TvShowData41_50} />
-      <TitleList title='Trending Now' slide={TvShowData51_60} />
-    </Fragment>
+    <>
+      {!isLoading1 && (
+        <TitleList title="Popular" slide={data1.results.slice(0, 10)} />
+      )}
+      {!isLoading1 && (
+        <TitleList title="Top Rated" slide={data1.results.slice(10, 20)} />
+      )}
+      {!isLoading2 && (
+        <TitleList title="Highest Grosing" slide={data2.results.slice(0, 10)} />
+      )}
+      {!isLoading2 && (
+        <TitleList title="New Releases" slide={data2.results.slice(10, 20)} />
+      )}
+      {!isLoading3 && (
+        <TitleList title="Most Liked" slide={data3.results.slice(0, 10)} />
+      )}
+      {!isLoading3 && (
+        <TitleList title="Trending Now" slide={data3.results.slice(10, 20)} />
+      )}
+    </>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  getTvShow: () => dispatch(getTvShow()),
-});
-const mapStateToProps = ({ tvShow }) => ({
-  TvShows: tvShow.tvShowItems,
-});
-export default connect(mapStateToProps, mapDispatchToProps)(TvShows);
+
+export default TvShows;

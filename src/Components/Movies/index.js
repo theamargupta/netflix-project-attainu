@@ -1,37 +1,43 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getMovies } from '../../Redux/Movie/movieActionGenrator';
-import TitleList from '../../Components/TitleList';
+import React from "react";
+import TitleList from "../../Components/TitleList";
+import { useGetMovieQuery } from "../../Utils/services";
 
-const Movies = ({ movies, getMovies }) => {
-  const movieData1_10 = movies.slice(0, 10);
-  const movieData11_20 = movies.slice(10, 20);
-  const movieData21_30 = movies.slice(20, 30);
-  const movieData31_40 = movies.slice(30, 40);
-  const movieData41_50 = movies.slice(40, 50);
-  const movieData51_60 = movies.slice(50, 60);
-  useEffect(() => {
-    getMovies();
-  }, [getMovies]);
+const Movies = ({ getMovies }) => {
+  const { data: data1, isLoading: isLoading1 } = useGetMovieQuery(1);
+  const { data: data2, isLoading: isLoading2 } = useGetMovieQuery(2);
+  const { data: data3, isLoading: isLoading3 } = useGetMovieQuery(3);
+
   return (
     <div>
-      <TitleList
-        title='Netflix Orignals'
-        height={'horizontal'}
-        slide={movieData1_10}
-      />
-      <TitleList title='Trending Now' slide={movieData11_20} />
-      <TitleList title='Top Rated' slide={movieData21_30} />
-      <TitleList title='Action Movies' slide={movieData31_40} />
-      <TitleList title='Comedy Movies' slide={movieData41_50} />
-      <TitleList title='Horror Movies' slide={movieData51_60} />
+      {!isLoading1 && (
+        <>
+          <TitleList
+            title="Netflix Orignals"
+            height={"horizontal"}
+            slide={data1.results.slice(0, 10)}
+          />
+          <TitleList title="Trending Now" slide={data1.results.slice(10, 20)} />
+        </>
+      )}
+      {!isLoading2 && (
+        <>
+          <TitleList title="Top Rated" slide={data2.results.slice(0, 10)} />
+          <TitleList
+            title="Action Movies"
+            slide={data2.results.slice(10, 20)}
+          />
+        </>
+      )}
+      {!isLoading3 && (
+        <>
+          <TitleList title="Comedy Movies" slide={data3.results.slice(0, 10)} />
+          <TitleList
+            title="Horror Movies"
+            slide={data3.results.slice(10, 20)}
+          />
+        </>
+      )}
     </div>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  getMovies: () => dispatch(getMovies()),
-});
-const mapStateToProps = ({ movie }) => ({
-  movies: movie.movieItems,
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Movies);
+export default Movies;

@@ -1,12 +1,10 @@
-import { combineReducers } from 'redux';
-import movieReducer from './Movie/movieReducer';
-import searchReducer from './Search/searchReducer';
-import tvShowReducer from './TvShows/tvShowReducer';
-import userReducer from './User/userReducer';
+import searchReducer from "./slices/searchSlice";
+import profileReducer from "./slices/profileSlice";
+import { movieApi, tvShowApi } from "../Utils/services";
 
-export const rootReducer = combineReducers({
-  movie: movieReducer,
-  tvShow: tvShowReducer,
-  user: userReducer,
+export const reducer = {
   search: searchReducer,
-});
+  profile: profileReducer,
+  [movieApi.reducerPath]: movieApi.reducer,
+  [tvShowApi.reducerPath]: tvShowApi.reducer,
+};

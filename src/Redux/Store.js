@@ -1,14 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import { rootReducer } from './rootReducer';
-
-const configStore = () => {
-  const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
-  return store;
-};
-
-export default configStore;
+import { configureStore } from "@reduxjs/toolkit";
+import { reducer } from "./rootReducer";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { movieApi,tvShowApi } from "../Utils/services";
+export const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(movieApi.middleware)
+      .concat(tvShowApi.middleware),
+});
+setupListeners(store.dispatch);

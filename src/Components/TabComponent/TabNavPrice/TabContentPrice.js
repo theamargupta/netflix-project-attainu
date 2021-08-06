@@ -1,19 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Icon } from 'react-icons-kit';
-import { cross } from 'react-icons-kit/icomoon/cross';
-import { checkmark } from 'react-icons-kit/icomoon/checkmark';
+import React from "react";
+import styled from "styled-components";
+import { Icon } from "react-icons-kit";
+import { cross } from "react-icons-kit/icomoon/cross";
+import { checkmark } from "react-icons-kit/icomoon/checkmark";
+import { useAuth0 } from "@auth0/auth0-react";
 const TabContentPrice = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <TabContainer>
-      <div className='tab-content-price'>
-        <div className='tab-top-content'>
+      <div className="tab-content-price">
+        <div className="tab-top-content">
           <span>Choose one plan and watch everything on Netflix</span>
           <br />
-          <button className='try-now-btn'>Try it now</button>
+          <button onClick={loginWithRedirect} className="try-now-btn">
+            Try it now
+          </button>
         </div>
         {/*Table*/}
-        <div className='tab-bottom-content'>
+        <div className="tab-bottom-content">
           <table>
             <thead>
               <tr>

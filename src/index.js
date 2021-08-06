@@ -1,22 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './app';
-import './index.scss';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import ConfigStore from './Redux/Store';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
+import "./index.scss";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store";
+import { Auth0Provider } from "@auth0/auth0-react";
 //=> redux
-const store = ConfigStore();
-// store.subscribe(() => {
-//   console.log(store.getState());
-// });
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}
+    >
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </Auth0Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

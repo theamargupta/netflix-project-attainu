@@ -1,18 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import Img from '../../../Assets/images/tab-1-pic.png';
+import React from "react";
+import styled from "styled-components";
+import Img from "../../../Assets/images/tab-1-pic.png";
+import { useAuth0 } from "@auth0/auth0-react";
 const TabContentDevice = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <TabContentContainer>
-      <div className='container'>
-        <div className='tab-content-device'>
-          <span className='content-text'>
+      <div className="container">
+        <div className="tab-content-device">
+          <span className="content-text">
             If you decide Netflix isn't for you - no problem. No commitment.
             Cancel online anytime
           </span>
           <br />
-          <button className='try-now-btn'>Try it now</button>
-          <img src={Img} alt='' />
+          <button onClick={loginWithRedirect} className="try-now-btn">
+            Try it now
+          </button>
+          <img src={Img} alt="" />
         </div>
       </div>
     </TabContentContainer>

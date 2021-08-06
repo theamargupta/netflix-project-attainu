@@ -1,25 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
-import ImgTv from '../../../Assets/images/tab-tv.png';
-import ImgMacBook from '../../../Assets/images/tab-macbook.png';
-import ImgTab from '../../../Assets/images/tab-tablet.png';
+import React from "react";
+import styled from "styled-components";
+import ImgTv from "../../../Assets/images/tab-tv.png";
+import ImgMacBook from "../../../Assets/images/tab-macbook.png";
+import ImgTab from "../../../Assets/images/tab-tablet.png";
+import { useAuth0 } from "@auth0/auth0-react";
 const TabContentDoor = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <TabContainer>
-      <div className='tab-content-door'>
-        <div className='tab-top-content'>
+      <div className="tab-content-door">
+        <div className="tab-top-content">
           <span>
-            {' '}
+            {" "}
             Watch TV shows and movies anytime, anywhere - <br />
             personalized for you
           </span>
-          <button className='try-now-btn'>Try it now</button>
+          <button onClick={loginWithRedirect} className="try-now-btn">
+            Try it now
+          </button>
         </div>
         {/*tab bottom content*/}
-        <div className='tab-bottom-content'>
+        <div className="tab-bottom-content">
           {/*TV*/}
           <div>
-            <img src={ImgTv} alt='' />
+            <img src={ImgTv} alt="" />
             <h3>Watch on your TV</h3>
             <p>
               Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray
@@ -27,14 +31,14 @@ const TabContentDoor = () => {
             </p>
           </div>
           {/*Tablet*/}
-          <div className='tab'>
-            <img src={ImgTab} alt='' />
+          <div className="tab">
+            <img src={ImgTab} alt="" />
             <h3>Watch instantly or download for later</h3>
             <p>Available on phone and tablet, wherever you are</p>
           </div>
           {/*Macbook*/}
-          <div className='mac-book'>
-            <img src={ImgMacBook} alt='' />
+          <div className="mac-book">
+            <img src={ImgMacBook} alt="" />
             <h3>Use any computer</h3>
             <p>Watch right on Netflix.com</p>
           </div>

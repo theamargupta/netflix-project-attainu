@@ -1,153 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
-import { connect } from 'react-redux';
-import { setUserProfile } from '../../Redux/User/userActionGenerator';
-import { withRouter, Redirect } from 'react-router-dom';
-import { firestore } from '../../Firebase';
-import Logo from '../../Components/Logo';
-import './index.scss';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography } from "@material-ui/core";
+import Logo from "../../Components/Logo";
+import "./index.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserProfile } from "../../Redux/slices/profileSlice";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
-    background: '#111',
-    color: '#fff',
-    height: '100vh',
+    background: "#111",
+    color: "#fff",
+    height: "100vh",
   },
   mainConatiner: {
-    paddingTop: '22vh',
+    paddingTop: "22vh",
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   img: {
-    width: '200px',
-    height: '200px',
-    cursor: 'pointer',
+    width: "200px",
+    height: "200px",
+    cursor: "pointer",
   },
   manageButton: {
-    border: '3px solid rgb(140,140,140)',
-    color: 'rgb(140,140,140)',
-    fontSize: '28px',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '10vh',
-    cursor: 'pointer',
+    border: "3px solid rgb(140,140,140)",
+    color: "rgb(140,140,140)",
+    fontSize: "28px",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "10vh",
+    cursor: "pointer",
   },
 }));
 
-const ManageProfile = ({
-  history,
-  setUserProfile,
-  currentUser,
-  userProfile,
-}) => {
+const ManageProfile = () => {
   const classes = useStyles();
-  const [profile, setProfile] = useState('');
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    const fethcdata = () => {
-      firestore
-        .collection(currentUser.uid)
-        .doc('userprofile')
-        .collection('profiles')
-        .onSnapshot((snapshot) => {
-          const data = snapshot.docs.map((doc) => doc.data());
-          if (data.length === 0) {
-            if (
-              currentUser.providerData[0].providerId === 'facebook.com' ||
-              currentUser.providerData[0].providerId === 'google.com'
-            ) {
-              firestore
-                .collection(currentUser.uid)
-                .doc('userprofile')
-                .collection('profiles')
-                .add({
-                  img:
-                    currentUser.photoURL || 'https://i.ibb.co/vvK8FX6/iu-3.jpg',
-                  profile: currentUser.displayName,
-                });
-              firestore
-                .collection(currentUser.uid)
-                .doc('userprofile')
-                .collection('profiles')
-                .add({
-                  img: 'https://i.ibb.co/WKrPzZd/iu.jpg',
-                  profile: 'Mommy',
-                });
-              firestore
-                .collection(currentUser.uid)
-                .doc('userprofile')
-                .collection('profiles')
-                .add({
-                  img: 'https://i.ibb.co/JpdSW1q/iu-4.jpg',
-                  profile: 'Jack',
-                });
-              firestore
-                .collection(currentUser.uid)
-                .doc('userprofile')
-                .collection('profiles')
-                .add({
-                  img: 'https://i.ibb.co/ZGwhrNH/iu-2.jpg',
-                  profile: 'Dad',
-                });
-            }
-          }
-        });
-    };
-    fethcdata();
-  }, [
-    currentUser.displayName,
-    currentUser.photoURL,
-    currentUser.providerData,
-    currentUser.uid,
-  ]);
-  useEffect(() => {
-    const fethcdata = () => {
-      firestore
-        .collection(currentUser.uid)
-        .doc('userprofile')
-        .collection('profiles')
-        .onSnapshot((snapshot) => {
-          setUser(snapshot.docs.map((doc) => doc.data()));
-        });
-    };
-    fethcdata();
-  }, [currentUser.uid]);
-
-  useEffect(() => {
-    setUserProfile(profile);
-    profile && history.push('/movie');
-  }, [history, profile, setUserProfile]);
-
-  const handleClick = (img, data) => {
-    setProfile({ img: img, profile: data });
+  const { allProfile } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleClick = (img, profile) => {
+    dispatch(setUserProfile({ image: img, profile: profile }));
+    history.push("/movie");
   };
-
-  if (!currentUser) {
-    return <Redirect to='/signin' />;
-  }
   return (
     <div className={classes.root}>
       <Logo />
       <Grid
         container
         className={classes.mainConatiner}
-        direction='row'
-        justify='center'
-        alignItems='center'
+        direction="row"
+        justify="center"
+        alignItems="center"
       >
         <Grid className={classes.row} container item lg={5}>
-          <Typography align='center' variant='h3' gutterBottom>
+          <Typography align="center" variant="h3" gutterBottom>
             Who's Watching ?
           </Typography>
         </Grid>
         <Grid container item lg={8} sm={8} className={classes.row}>
-          {user.map((data, index) => (
+          {allProfile.map((data, index) => (
             <Grid
               item
               lg={3}
@@ -155,15 +72,15 @@ const ManageProfile = ({
               sm={12}
               key={index}
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              onClick={() => handleClick(data.img, data.profile)}
+              onClick={() => handleClick(data.image, data.profile)}
             >
-              <img className={classes.img} src={data.img} alt='' />
-              <Typography align='center' variant='h6' gutterBottom>
+              <img className={classes.img} src={data.image} alt="" />
+              <Typography align="center" variant="h6" gutterBottom>
                 {data.profile}
               </Typography>
             </Grid>
@@ -172,9 +89,9 @@ const ManageProfile = ({
         <Grid container className={classes.row} item lg={8}>
           <Grid container item className={classes.manageButton} lg={3}>
             <Typography
-              align='center'
-              onClick={() => history.push('/editpro1')}
-              variant='h6'
+              align="center"
+              onClick={() => history.push("/editpro1")}
+              variant="h6"
               gutterBottom
             >
               Manage profile
@@ -185,17 +102,8 @@ const ManageProfile = ({
     </div>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  setUserProfile: (user) => dispatch(setUserProfile(user)),
-});
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-  userProfile: user.userProfile,
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(ManageProfile));
+
+export default ManageProfile;
 // https://i.ibb.co/ZGwhrNH/iu-2.jpg
 // https://i.ibb.co/JpdSW1q/iu-4.jpg
 // https://i.ibb.co/vvK8FX6/iu-3.jpg

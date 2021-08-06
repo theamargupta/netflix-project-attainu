@@ -1,28 +1,29 @@
 import React from 'react';
 import './index.css';
 import logo from '../../Assets/svg/logo.svg';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
+import { useAuth0 } from "@auth0/auth0-react";
 import { ic_keyboard_arrow_right } from 'react-icons-kit/md/ic_keyboard_arrow_right';
 const Header = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <HeaderComponent className='header-container'>
       <div className='header-top'>
         <Logo src={logo} />
-        <Link to='signin' className='signIn-btn'>
+        <button onClick={()=>loginWithRedirect()} className='signIn-btn'>
           Sign In
-        </Link>
+        </button>
       </div>
       {/*Header content*/}
 
       <div className='header-content'>
         <Tittle>See what's next</Tittle>
         <SubTittle>WATCH ANYWHERE. CANCEL ANYWHERE</SubTittle>
-        <Link to='signup' className='try-now-btn'>
+        <button onClick={()=>loginWithRedirect()} className='try-now-btn'>
           Try it now
           <Icon className='Icon' icon={ic_keyboard_arrow_right} size={38} />
-        </Link>
+        </button>
       </div>
     </HeaderComponent>
   );

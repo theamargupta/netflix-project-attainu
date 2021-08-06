@@ -1,51 +1,51 @@
-import React from 'react';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import tmdb from '../../Assets/tmdb.png';
-import github from '../../Assets/github.png';
-import './index.scss';
+import React from "react";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import tmdb from "../../Assets/tmdb.png";
+import github from "../../Assets/github.png";
+import "./index.scss";
 
 const Footer = () => {
   return (
-    <div className='footer'>
-      <div className='footer__container'>
-        <div className='footer__start'>
+    <div className="footer">
+      <div className="footer__container">
+        <div className="footer__start">
           <h1
-            className='footer__text footer__text--1'
-            onClick={() => window.open(`https://theamargupta.tech/`, '_blank')}
+            className="footer__text footer__text--1"
+            onClick={() => window.open(`https://theamargupta.tech/`, "_blank")}
           >
-            By <span className='footer__link'>Amar Gupta & Akash Dutta</span>
+            By <span className="footer__link">Amar Gupta</span>
           </h1>
         </div>
 
-        <div className='footer__center'>
+        <div className="footer__center">
           <img
             src={tmdb}
-            alt='tmdb'
-            className='footer__logo-tmdb'
+            alt="tmdb"
+            className="footer__logo-tmdb"
             onClick={() =>
-              window.open(` https://www.themoviedb.org/en`, '_blank')
+              window.open(` https://www.themoviedb.org/en`, "_blank")
             }
           />
 
-          <h1 className='footer__text footer__text--2'>
-            Copyright©2020,{' '}
-            <span className='react'>
-              {' '}
+          <h1 className="footer__text footer__text--2">
+            Copyright©2020,{" "}
+            <span className="react">
+              {" "}
               ReactJS is
-              <FavoriteIcon className='footer__icon-heart-o footer__icon-heart-off' />
+              <FavoriteIcon className="footer__icon-heart-o footer__icon-heart-off" />
             </span>
           </h1>
         </div>
 
         <div
-          className='footer__end'
+          className="footer__end"
           onClick={() =>
-            window.open(`https://github.com/attainu/Stream-em-all`, '_blank')
+            window.open(`https://github.com/theamargupta/netflix-project-attainu`, "_blank")
           }
         >
-          <img src={github} alt='github' className='footer__logo-github' />
+          <img src={github} alt="github" className="footer__logo-github" />
 
-          <h1 className='footer__text footer__link'>View on Github</h1>
+          <h1 className="footer__text footer__link">View on Github</h1>
         </div>
       </div>
     </div>
